@@ -15,7 +15,9 @@ release_osx: clean ## Build release version of application
 
 release_linux: clean ## Build release version of application
 	mkdir -p ./dist
-	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a -ldflags '-w -extldflags "-static"' -o ./dist/http_fetcher_exporter_linux_amd64
+	# CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a -ldflags '-w -extldflags "-static"' -o ./dist/http_fetcher_exporter_linux_amd64
+	# compile with dynamic linking
+	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a  -o ./dist/http_fetcher_exporter_linux_amd64
 
 clean:
 	rm -rf ./dist/*
