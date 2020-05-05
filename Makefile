@@ -11,11 +11,11 @@ all: generate lint test build ## Test, lint check and build application
 
 release_osx: clean ## Build release version of application
 	mkdir -p ./dist
-	CGO_ENABLED=1 GOOS=darwin GOARCH=amd64 go build -a -o ./dist/http_fetcher_exporter_darvin_amd64
+	CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -a -tags -ldflags '-w' -o ./dist/http_fetcher_exporter_darvin_amd64
 
 release_linux: clean ## Build release version of application
 	mkdir -p ./dist
-	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a -o ./dist/http_fetcher_exporter_linux_amd64
+	CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -a -ldflags '-w -extldflags "-static"' -o ./dist/http_fetcher_exporter_linux_amd64
 
 clean:
 	rm -rf ./dist/*
